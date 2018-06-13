@@ -6,7 +6,8 @@ class Container extends React.Component {
         super();
 
         this.state = {
-            deadDate: (new Date('June 30, 2018')).toString(),
+            newDate: '',
+            deadDate: (new Date()).toString(),
             days: 0,
             hours: 0,
             minutes: 0,
@@ -14,14 +15,24 @@ class Container extends React.Component {
         };
     }
 
+    componentWillMount() {
+        this.getTime();
+    }
+
     componentDidMount() {
+
+    }
+
+    pressStart() {
+        this.setState({deadDate: this.state.newDate});
+
         setInterval(() => {
-           this.getTime();
+            this.getTime();
         }, 1);
     }
 
     getTime() {
-        const time = Date.parse(new Date('June 30, 2018')) - Date.parse(new Date());
+        const time = Date.parse(new Date(this.state.deadDate)) - Date.parse(new Date());
         const seconds = Math.floor((time/1000) % 60);
         const minutes = Math.floor((time/1000/60) % 60);
         const hours = Math.floor(time/(1000*60*60) % 24);
@@ -32,14 +43,16 @@ class Container extends React.Component {
         });
     }
 
-
-
     render() {
         return (
             <div>
-                <div>Countdown to date: {this.state.deadDate}</div>
+                <div>Countdown to date:
+                    <input placeholder='new date' onChange={event => this.setState({newDate: event.target.value})}/>
+                    <button class="btn" onClick={() => this.pressStart()}>Start</button>
+                </div>
 
-                <div id="countdown" class="countdownHolder">
+                <div class="countdownHolder">{this.state.deadDate}</div>
+                <div class="countdownHolder">
                     <span class="countDays">
                         <span class="position">
                             <span class="digit static">{this.state.days}</span>

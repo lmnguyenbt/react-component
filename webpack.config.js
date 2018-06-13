@@ -39,32 +39,6 @@ const config = {
 		new UglifyJsPlugin({ mangle: false, sourcemap: false }),
         new ExtractTextPlugin({filename: 'styles.css'})
 	],
-	/*plugins: [
-	 new UglifyJsPlugin({
-	 sourceMap: true,
-	 compress: {
-	 warnings: true
-	 }
-	 }),
-	 new webpack.LoaderOptionsPlugin({
-	 minimize: true,
-	 debug: false,
-	 options: {
-	 context: __dirname
-	 }
-	 }),
-	 new webpack.BannerPlugin({
-	 banner: 'Banner',
-	 raw: true,
-	 entryOnly: true
-	 }),
-	 new ExtractTextPlugin({
-	 filename: "bundle.css",
-	 disable: false,
-
-	 allChunks: true
-	 })
-	 ],*/
 };
 
 if (process.env.NODE_ENV === 'production') {
